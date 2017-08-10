@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import login from './loginState.js';
-import color from './color.js';
+import loginInfo from './loginInfo.js';
+import memberInfo from './memberInfo.js';
+import modal from './modal.js'
 const reducer = combineReducers({
-	themeColor:color,
-	loginState:login
+	loginInfo,
+	memberInfo,
+	modal
 })
 export default reducer

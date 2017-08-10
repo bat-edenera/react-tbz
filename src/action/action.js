@@ -1,12 +1,24 @@
-export function checkLog(){
-	return{type:'CHECK_LOG'}
-}
-export function logOut(){
-	return{type:'LOGIN_OUT'}
-}
-export function changeColor(color){
+export function changeColor(payload){
 	return{
 		type:'CHANGE_COLOR',
-		color,
+		payload
+	}
+}
+export function changeName(payload){
+	return{
+		type:'CHANGE_NAME',
+		payload
+	}
+}
+export function callModalOver(payload){
+	return {
+		type:'OVER',
+		payload
+	}
+}
+export function callColorModal(payload){
+	return {
+		type:'COLOR_LIST',
+		payload
 	}
 }
