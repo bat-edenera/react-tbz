@@ -3,13 +3,9 @@ import {connect} from 'react-redux';
 class Modalover extends Component{
 	render(){
 		const {show} = this.props;
-		if(show){
-			return (
-				<div className="modalover"></div>
-			)
-		}else{
-			return null
-		}
+		return show?(
+			<div className="modalover"></div>
+		):null;
 	}
 }
 var mapState = (state)=>({

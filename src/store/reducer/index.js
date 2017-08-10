@@ -7,4 +7,4 @@ const reducer = combineReducers({
 	memberInfo,
 	modal
 })
-export default reducer
+export default reducer 

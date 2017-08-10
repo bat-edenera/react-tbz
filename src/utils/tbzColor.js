@@ -11,6 +11,7 @@ function initColor(){
 	}
 }
 function getColor(_color){
+	console.log('变色了')
 	var color = Color(_color);
 	var value = color.getValue(),  //明度
 			// saturation = color.getSaturation(), //饱和度

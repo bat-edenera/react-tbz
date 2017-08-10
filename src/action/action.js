@@ -1,4 +1,5 @@
 export function changeColor(payload){
+	console.log(payload)
 	return{
 		type:'CHANGE_COLOR',
 		payload
