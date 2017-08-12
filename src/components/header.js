@@ -1,14 +1,15 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import tbzColor from 'utils/tbzColor.js';
 import {connect} from 'react-redux';
-import {callColorModal} from 'action/action.js'
-
 import CheckBranch from './header/checkBranch.js'
+import ChangeColor from './header/changeColor.js'
+
+
 class Header extends Component{
 	render(){
+		const {bgColor:backgroundColor,fontColor:color} = this.props.tbzColor;
 		return (
-			<div className="header" style={{...tbzColor.styles.init}}>
+			<div className="header" style={{color,backgroundColor}}>
 				<div className="logo">
 					<Link to="/template/home" target="_blank" className="tbzlogo">
 						<i className="tbzico ico-logo"/>
@@ -24,15 +25,13 @@ class Header extends Component{
 					<Link to="/template/home" target="_blank">使用秘籍</Link>
 				</div>
 				<div className="right">
-					<a href="javascript:;" onClick={this.props.showColor}><i className="tbzico ico-skin"/>风格</a>
+					<ChangeColor/>
 				</div>
 			</div>
 		)
 	}
 }
-var mapProps = (dispatch)=>({
-	showColor:()=>{
-		dispatch(callColorModal(true))
-	}
+var mapState = (state)=>({
+	tbzColor:state.color
 })
-export default connect(null,mapProps)(Header)
+export default connect(mapState)(Header)

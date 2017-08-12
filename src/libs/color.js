@@ -34,6 +34,7 @@
 
 // create namespaces
 /*global net */
+/* eslint no-console:0, react/no-multi-comp:0 */
 if ("undefined" == typeof net) { var net = {}; }
 if (!net.brehaut) { net.brehaut = {}; }
 
