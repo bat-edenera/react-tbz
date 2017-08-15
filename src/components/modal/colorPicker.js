@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import $ from 'jquery'
+import {changeColor} from 'action/action.js';
 class ColorPicker extends Component{
 	constructor(props){
 		super(...arguments);
@@ -8,8 +8,11 @@ class ColorPicker extends Component{
 		this.falt = null;
 		this.bar = null;
 		//event mark
-		this.flatMouseDown = false;
-		this.barMouseDown = false;
+		this.mouse = {
+			type:undefined,
+			x:0,
+			y:0,
+		}
 		this.state ={
 			//pos
 			flatPos:[.5,.5],
@@ -22,6 +25,7 @@ class ColorPicker extends Component{
 		this.barMdown = this.barMdown.bind(this);
 		this.mouseMove = this.mouseMove.bind(this);
 		this.mouseUp = this.mouseUp.bind(this);
+		this.inputChange = this.inputChange.bind(this);
 	}
 	componentDidMount(){
 		this.flat = this.refs.flat.getContext('2d'),
@@ -36,7 +40,11 @@ class ColorPicker extends Component{
 		document.removeEventListener('mouseup',this.mouseUp)
 	}
 	flatMdown(event){
-		this.flatMouseDown = true;
+		this.mouse = {
+			type:'flat',
+			x:event.clientX,
+			y:event.clientY
+		}
 		var rect = event.target.getBoundingClientRect();
 		var flatPos = [];
 		flatPos[0] = (event.clientX-rect.left)/160;
@@ -47,7 +55,11 @@ class ColorPicker extends Component{
 		this._analysePos(flatPos,this.state.barPos)
 	}
 	barMdown(event){
-		this.barMouseDown = true;
+		this.mouse = {
+			type:'bar',
+			x:event.clientX,
+			y:event.clientY
+		}
 		var rect = event.target.getBoundingClientRect();
 		var barPos = [];
 		barPos = (event.clientY-rect.top)/160;
@@ -58,17 +70,47 @@ class ColorPicker extends Component{
 		this._initFlat(this._hsb2rgb(hsb).toCss);
 		this._analysePos(this.state.flatPos,barPos)
 	}
-	mouseMove(){
-		if(this.flatMouseDown){
-			console.log('flat')
+	mouseMove(event){
+		if(this.mouse.type!==undefined){
+			var x = (event.clientX - this.mouse.x)/160;
+			var y = (event.clientY - this.mouse.y)/160;
+			this.mouse.x = event.clientX;
+			this.mouse.y = event.clientY;
 		}
-		if(this.barMouseDown){
-			console.log('bar')
+		if(this.mouse.type==='flat'){
+			var fx = this.state.flatPos[0]+x;
+			var fy = this.state.flatPos[1]+y;
+			fx<0&&(fx=0);
+			fx>1&&(fx=1);
+			fy<0&&(fy=0);
+			fy>1&&(fy=1);
+			var flatPos = [fx,fy];
+			this.setState({
+				flatPos
+			})
+			this._analysePos(flatPos,this.state.barPos)
+		}
+		if(this.mouse.type==="bar"){
+			var barPos = this.state.barPos+y;
+			barPos<0&&(barPos=0);
+			barPos>1&&(barPos=1);
+			var hsb = [(1-barPos)*360,1,1];
+			this.setState({
+				barPos
+			})
+			this._initFlat(this._hsb2rgb(hsb).toCss);
+			this._analysePos(this.state.flatPos,barPos)
 		}
 	}
 	mouseUp(){
-		this.flatMouseDown = false;
-		this.barMouseDown = false;
+		this.mouse.type=undefined;
+	}
+	inputChange(evt){
+		var hex = evt.target.value;
+		if(hex.length===0){
+			hex = '#';
+		}
+		this.setState({hex})
 	}
 	render(){
 		const {posX,posY} = this.props;
@@ -101,7 +143,7 @@ class ColorPicker extends Component{
 				<div className="info">
 					<span className="cur" style={styles.cur}></span>
 					<span className="old" style={styles.old}></span>
-					<input type="text" value={hex}/>
+					<input type="text" value={hex} onChange={this.inputChange}/>
 					<button>确定</button>
 				</div>
 			</div>
@@ -135,12 +177,14 @@ class ColorPicker extends Component{
 	}
 	_analyseColor(color){
 		var hsb,rgb,hex;
-		//统一rgb[0,0,0]
-		if(/^#/.test(color)){
-			hex = color;
-			color = color.replace('#','');
-			color = this._hex2rgb(color);
+		if(!/^#/.test(color)){
+			color = color.replace('rgb(','');
+			color = color.replace(')','')
+			color = `#${this._rgb2hex(color)}`;
 		}
+		hex = color;
+		color = color.replace('#','');
+		color = this._hex2rgb(color);
 		hsb = color = this._rbg2hsb(color);
 
 		this._initFlat(this._hsb2rgb([color[0],1,1]).toCss);
@@ -164,6 +208,7 @@ class ColorPicker extends Component{
 			hex:`#${hex}`,
 			newColor:rgb.toCss
 		})
+		this.props.changeColor(rgb.toCss)
 	}
 	//颜色转换
 	_rbg2hsb(rgb){
@@ -240,4 +285,12 @@ var mapState = (state)=>({
 	posY:state.modal.colorPicker.posY,
 	initColor:state.memberInfo.themeColor
 })
-export default connect(mapState)(ColorPicker)
+var mapProps = (dispatch)=>({
+	changeColor:(color)=>{
+		dispatch(changeColor({
+			themeColor:color,
+			isDiy:true
+		}))
+	}
+})
+export default connect(mapState,mapProps)(ColorPicker)

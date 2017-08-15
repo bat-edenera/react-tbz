@@ -484,7 +484,7 @@
 		float: left;
 		position: relative;
 		.dot{
-			cursor: pointer;
+			pointer-events:none;
 			position: absolute;
 			width: 10px;
 			height: 10px;
@@ -499,6 +499,7 @@
 		position: relative;
 		margin-left: 15px;
 		.focus{
+			pointer-events:none;
 			position: absolute;
 			height: 2px;
 			left: 0;
@@ -508,6 +509,7 @@
 	}
 	canvas{
 		cursor: pointer;
+		display: block;
 	}
 	.info{
 		float: left;
