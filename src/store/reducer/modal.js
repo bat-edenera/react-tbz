@@ -1,7 +1,11 @@
 const modal = {
 	over:false,
 	colorList:false,
-	colorPicker:false,
+	colorPicker:{
+		show:false,
+		posX:0,
+		posY:0
+	},
 	branch:false,
 	user:false,
 }
@@ -13,6 +17,8 @@ export default (state=modal,action)=>{
 			return {...state,colorList:action.payload}
 		case 'COLOR_PICKER':
 			return {...state,colorPicker:action.payload}
+		case 'CLOSE_COLOR_PICKER':
+			return {...state,colorPicker:{...state.colorPicker,show:false}}
 		case 'BRANCH':
 			return {...state,branch:action.payload}
 		case 'USER':

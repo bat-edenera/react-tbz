@@ -1,0 +1,45 @@
+export const animation = {
+	flipInX:(node,done)=>{
+		node.classList.add('animated','flipInX')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','flipInX')
+		})
+	},
+	jello:(node,done)=>{
+		node.classList.add('animated','jello')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','jello')
+		})
+	},
+	rotateIn:(node,done)=>{
+		node.classList.add('animated','rotateIn')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','rotateIn')
+		})
+	},
+	rollIn:(node,done)=>{
+		node.classList.add('animated','rollIn')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','rollIn')
+		})
+	},
+	bounceOut:(node,done)=>{
+		node.classList.add('animated','bounceOut')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','bounceOut')
+		})
+	},
+	fadeOutDown:(node,done)=>{
+		node.classList.add('animated','fadeOutDown')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','fadeOutDown')
+		})
+	},
+
+}

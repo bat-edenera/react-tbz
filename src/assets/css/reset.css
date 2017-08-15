@@ -13,6 +13,9 @@ html {
 	box-sizing: border-box;
 	font-size: 625%;
 }
+body{
+	font-size: .12rem;
+}
 
 *,
 *:before,

@@ -1,5 +1,5 @@
 const loginInfo = {
-	uid:1,
+	uid:17708,
 	teamId:0,
 	coopId:0,
 }

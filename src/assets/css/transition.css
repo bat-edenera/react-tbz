@@ -20,7 +20,7 @@
 /* fadeUp */
 .fadeUp-enter {
   opacity: 0;
-  transform:translateY(-80px);
+  transform:translateY(-50px);
 }
 .fadeUp-enter.fadeUp-enter-active {
   opacity: 1;
@@ -33,7 +33,7 @@
 }
 .fadeUp-leave.fadeUp-leave-active {
   opacity: 0;
-  transform:translateY(80px);
+  transform:translateY(-50px);
   transition: all .2s ease-in;
 }
 /* fadeRight */

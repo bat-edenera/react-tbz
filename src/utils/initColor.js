@@ -17,7 +17,7 @@ function getColor(_color){
 			lightness = color.getLightness();  //亮度
 	//主题色
 	var bgColor = color.toCSS();
-	var drakColor = color.darkenByRatio(.5).toCSS();
+	var darkColor = color.darkenByRatio(.12).toCSS();
 	var lightColor = color.lightenByRatio(.12).toCSS();
 	//对应主题色的文字颜色
 	var fontColor = (lightness>0.75&&value>.78)||(value>.9&&hue>50&&hue<180)?'#3f4652':'#fff';
@@ -27,7 +27,7 @@ function getColor(_color){
 		type:'INIT_COLOR',
 		payload:{
 			bgColor,
-			drakColor,
+			darkColor,
 			lightColor,
 			fontColor,
 			underBg
