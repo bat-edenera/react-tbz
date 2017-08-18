@@ -14,21 +14,6 @@ import 'assets/css/main.scss'
 //初始化主题色
 initColor();
 class App extends Component {
-	animateEnter(node, done){
-		node.classList.add('animated','flipInX')
-		node.addEventListener('animationend',()=>{
-			done();
-			node.classList.remove('animated','flipInX')
-		})
-	}
-
-	animateLeave(node, done){
-		node.classList.add('animated','bounceOut')
-		node.addEventListener('animationend',()=>{
-			done();
-			node.classList.remove('animated','bounceOut')
-		})
-	}
 	render(){
 		return (
 			<div className="app">

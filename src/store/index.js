@@ -1,8 +1,11 @@
 import {createStore,applyMiddleware,compose} from 'redux';
-import {createLogger} from 'redux-logger';
+// import {createLogger} from 'redux-logger';
+import thunk from 'redux-thunk'
 import reducer from './reducer';
-var logger = createLogger();
-
+// var logger = createLogger();
+import Perf from 'react-addons-perf';
+const win = window;
+win.Perf = Perf;
 const composeEnhancers =
   typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
@@ -11,7 +14,7 @@ const composeEnhancers =
     }) : compose;
 
 const enhancer = composeEnhancers(
-  // applyMiddleware(logger),
+  applyMiddleware(thunk),
   // other store enhancers if any
 );
 const store = createStore(reducer, enhancer);

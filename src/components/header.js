@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import CheckBranch from './header/checkBranch.js'
 import ChangeColor from './header/changeColor.js'
-
+import colorWrap from 'components/HOC/colorWrap.js'
 
 class Header extends Component{
 	render(){
-		const {bgColor:backgroundColor,fontColor:color} = this.props.tbzColor;
+		const {bgColor:backgroundColor,fontColor:color} = this.props.color;
 		return (
 			<div className="header" style={{color,backgroundColor}}>
 				<div className="logo">
@@ -31,7 +31,5 @@ class Header extends Component{
 		)
 	}
 }
-var mapState = (state)=>({
-	tbzColor:state.color
-})
-export default connect(mapState)(Header)
+export default colorWrap(Header)
+

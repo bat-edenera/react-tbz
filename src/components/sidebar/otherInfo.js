@@ -15,6 +15,9 @@ class Otherinfo extends Component{
 			})
 		})
 	}
+	shouldComponentUpdate(props,state){
+		return state.color!==this.state.color
+	}
 	render(){
 		const {cloudCount,cloud,foldCount,fold} = this.props;
 		const color = this.state.color;

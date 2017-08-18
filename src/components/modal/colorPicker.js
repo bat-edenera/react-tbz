@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {changeColor} from 'action/action.js';
+import {changeColor,closeColorPicker} from 'action/action.js';
 class ColorPicker extends Component{
 	constructor(props){
 		super(...arguments);
@@ -26,6 +26,9 @@ class ColorPicker extends Component{
 		this.mouseMove = this.mouseMove.bind(this);
 		this.mouseUp = this.mouseUp.bind(this);
 		this.inputChange = this.inputChange.bind(this);
+		this.resetColor = this.resetColor.bind(this);
+		this.recoverColor = this.recoverColor.bind(this);
+		this.submit = this.submit.bind(this);
 	}
 	componentDidMount(){
 		this.flat = this.refs.flat.getContext('2d'),
@@ -38,6 +41,17 @@ class ColorPicker extends Component{
 	componentWillUnmount(){
 		document.removeEventListener('mousemove',this.mouseMove)
 		document.removeEventListener('mouseup',this.mouseUp)
+	}
+	resetColor(){
+		this._analyseColor(this.state.color)
+		this.props.changeColor(this.state.color)
+	}
+	recoverColor(){
+		this._analyseColor(this.state.newColor)
+		this.props.changeColor(this.state.newColor)
+	}
+	submit(){
+		this.props.closeColorPicker()
 	}
 	flatMdown(event){
 		this.mouse = {
@@ -111,6 +125,8 @@ class ColorPicker extends Component{
 			hex = '#';
 		}
 		this.setState({hex})
+		this._analyseColor(hex)
+		this.props.changeColor(hex)
 	}
 	render(){
 		const {posX,posY} = this.props;
@@ -141,10 +157,10 @@ class ColorPicker extends Component{
 					<span className="focus" style={styles.bar}/>
 				</div>
 				<div className="info">
-					<span className="cur" style={styles.cur}></span>
-					<span className="old" style={styles.old}></span>
+					<span className="cur" style={styles.cur} onClick={this.recoverColor}></span>
+					<span className="old" style={styles.old} onClick={this.resetColor}></span>
 					<input type="text" value={hex} onChange={this.inputChange}/>
-					<button>确定</button>
+					<button onClick={this.submit}>确定</button>
 				</div>
 			</div>
 		)
@@ -227,15 +243,15 @@ class ColorPicker extends Component{
 		}
 		//rgb的下标分别为0、1、2，maxIndex和minIndex用于存储rgb中最大最小值的下标
 		for(let i=0;i<3;i++) {
-				if(rearranged[0]==rgb[i]) minIndex=i;
-				if(rearranged[2]==rgb[i]) maxIndex=i;
+				if(rearranged[0]===rgb[i]) minIndex=i;
+				if(rearranged[2]===rgb[i]) maxIndex=i;
 		}
 		//算出亮度
 		hsb[2]=rearranged[2]/255;
 		//算出饱和度
 		hsb[1]=1-rearranged[0]/rearranged[2];
 		//算出色相
-		hsb[0]=maxIndex*120+60* (rearranged[1]/hsb[1]/rearranged[2]+(1-1/hsb[1])) *((maxIndex-minIndex+3)%3==1?1:-1);
+		hsb[0]=maxIndex*120+60* (rearranged[1]/hsb[1]/rearranged[2]+(1-1/hsb[1])) *((maxIndex-minIndex+3)%3===1?1:-1);
 		//防止色相为负值
 		hsb[0]=(hsb[0]+360)%360;
 		return hsb;
@@ -270,7 +286,7 @@ class ColorPicker extends Component{
 		].join('');
 	}
 	_hex2rgb(hex) {
-		if (hex.length == 3) {
+		if (hex.length === 3) {
 			hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
 		}
 		return [
@@ -291,6 +307,9 @@ var mapProps = (dispatch)=>({
 			themeColor:color,
 			isDiy:true
 		}))
+	},
+	closeColorPicker:()=>{
+		dispatch(closeColorPicker())
 	}
 })
 export default connect(mapState,mapProps)(ColorPicker)

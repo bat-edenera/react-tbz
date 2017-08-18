@@ -2,9 +2,11 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import Modalover from 'components/modal/modalOver.js';
 import {changeColor,callColorModal,callColorPicker,closeColorPicker} from 'action/action.js';
-import $ from 'jquery'
 
 class ColorModal extends Component{
+	shouldComponentUpdate(props,state){
+		return props.isDiy===false||(props.isDiy===true&&props.colorList.indexOf(props.themeColor)>-1)
+	}
 	//变色
 	changeColor(isDiy,evt){
 		if(evt.target.localName!=='li'){
@@ -41,14 +43,14 @@ class ColorModal extends Component{
 	render(){
 		const {colorList,themeColor,isDiy} = this.props;
 		return (
-			<div className="color-modal">
+			<div className="color-modal"> 
 				<span className="close" onClick={this.close.bind(this)}><i className="tbzico ico-close1"/></span>
 				<div className="title"><i className="tbzico ico-skin"/>皮肤颜色</div>
 				<ul>
 				{colorList.map((color)=>(
 					<li key={color} className={color===themeColor&&!isDiy?'active':''} style={{backgroundColor:color}} data-color={color} onClick={this.changeColor.bind(this,false)}><i className="tbzico ico-ok"/></li>
 				))}
-					<li className={`diycolor ${isDiy?'active':''}`} data-color="#dc6210" onClick={this.initColorPicker.bind(this)}>
+					<li className={`diycolor ${isDiy?'active':''}`} onClick={this.initColorPicker.bind(this)}>
 						<i className="tbzico ico-ok"/>
 					</li>
 				</ul>

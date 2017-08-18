@@ -6,6 +6,20 @@ export const animation = {
 			node.classList.remove('animated','flipInX')
 		})
 	},
+	flipInY:(node,done)=>{
+		node.classList.add('animated','flipInY')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','flipInY')
+		})
+	},
+	flip:(node,done)=>{
+		node.classList.add('animated','flip')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','flip')
+		})
+	},
 	jello:(node,done)=>{
 		node.classList.add('animated','jello')
 		node.addEventListener('animationend',()=>{
@@ -27,6 +41,20 @@ export const animation = {
 			node.classList.remove('animated','rollIn')
 		})
 	},
+	rubberBand:(node,done)=>{
+		node.classList.add('animated','rubberBand')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','rubberBand')
+		})
+	},
+	fadeInDown:(node,done)=>{
+		node.classList.add('animated','fadeInDown','shorten')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','fadeInDown','shorten')
+		})
+	},
 	bounceOut:(node,done)=>{
 		node.classList.add('animated','bounceOut')
 		node.addEventListener('animationend',()=>{
@@ -35,10 +63,10 @@ export const animation = {
 		})
 	},
 	fadeOutDown:(node,done)=>{
-		node.classList.add('animated','fadeOutDown')
+		node.classList.add('animated','fadeOutDown','shorten')
 		node.addEventListener('animationend',()=>{
 			done();
-			node.classList.remove('animated','fadeOutDown')
+			node.classList.remove('animated','fadeOutDown','shorten')
 		})
 	},
 
