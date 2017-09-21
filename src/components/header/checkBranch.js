@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import {callVersionModal} from 'action/action.js';
 class CheckBranch extends Component{
 	render(){
 		const {show,title,toTitle} = this.props;
 		if(show){
 			return (
-				<div className="branch">
+				<div className="branch" onClick={this.props.callModal}>
 					<p>{title}</p>
 					<span>切换至{toTitle}<i className="tbzico ico-hdown"></i></span>
 				</div>
@@ -31,4 +32,12 @@ var mapState =(state)=>{
 		show
 	}
 }
-export default connect(mapState)(CheckBranch)
+var mapProps = (dispatch)=>({
+	callModal:()=>{
+		dispatch(callVersionModal({
+			over:true,
+			versionModal:true,
+		}));
+	}
+})
+export default connect(mapState,mapProps)(CheckBranch)

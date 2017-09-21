@@ -7,8 +7,6 @@ import registerServiceWorker from './registerServiceWorker';
 import store from 'store/index.js';
 import App from 'components/index.js';
 import Intro from 'components/intro.js';
-import 'assets/css/reset.css'
-import 'assets/css/tbzico.css'
 
 ReactDOM.render(
 	<Provider store={store}>

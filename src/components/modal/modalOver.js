@@ -1,14 +1,19 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import {closeModal} from 'action/action.js';
 class Modalover extends Component{
+	componentDidMount(){
+
+	}
 	render(){
-		const {show} = this.props;
-		return show?(
-			<div className="modalover"></div>
-		):null;
+		return (
+			<div className="modalover" onClick={this.props.closeModal}></div>
+		)
 	}
 }
-var mapState = (state)=>({
-	show:state.modal.over
+var mapProps = (dispatch)=>({
+	closeModal:()=>{
+		dispatch(closeModal())
+	}
 })
-export default connect(mapState)(Modalover);
+export default connect(null,mapProps)(Modalover);

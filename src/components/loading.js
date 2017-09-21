@@ -1,5 +1,4 @@
-import React,{Component} from 'react';
-import 'assets/css/animation.css'
+import React from 'react';
 import colorWrap from 'components/HOC/colorWrap.js'
 export default colorWrap(({color})=>{
 	var styles = {
@@ -7,8 +6,8 @@ export default colorWrap(({color})=>{
 			position:'absolute',
 			width:'50px',
 			height:'50px',
-			top:'50%',
-			left:'50%',
+			top: 'calc(50% + 15px)',
+    	left: 'calc(50% + 1.25rem)',
 			transform:'rotate(45deg) scale(.5)'
 		},
 		ball:{

@@ -29,18 +29,20 @@ class ColorPicker extends Component{
 		this.resetColor = this.resetColor.bind(this);
 		this.recoverColor = this.recoverColor.bind(this);
 		this.submit = this.submit.bind(this);
+		this.flatMmove = this.flatMmove.bind(this);
+		this.barMmove = this.barMmove.bind(this);
 	}
 	componentDidMount(){
-		this.flat = this.refs.flat.getContext('2d'),
+		this.flat = this.refs.flat.getContext('2d');
 		this.bar = this.refs.bar.getContext('2d');
 		this._initBar();
 		this._analyseColor(this.props.initColor)
-		document.addEventListener('mousemove',this.mouseMove,false);
-		document.addEventListener('mouseup',this.mouseUp,false)
+		window.addEventListener('mousemove',this.mouseMove,false);
+		window.addEventListener('mouseup',this.mouseUp,false)
 	}
 	componentWillUnmount(){
-		document.removeEventListener('mousemove',this.mouseMove)
-		document.removeEventListener('mouseup',this.mouseUp)
+		window.removeEventListener('mousemove',this.mouseMove)
+		window.removeEventListener('mouseup',this.mouseUp)
 	}
 	resetColor(){
 		this._analyseColor(this.state.color)
@@ -54,6 +56,7 @@ class ColorPicker extends Component{
 		this.props.closeColorPicker()
 	}
 	flatMdown(event){
+		event.preventDefault();
 		this.mouse = {
 			type:'flat',
 			x:event.clientX,
@@ -68,7 +71,14 @@ class ColorPicker extends Component{
 		})
 		this._analysePos(flatPos,this.state.barPos)
 	}
+	flatMmove(event){
+		if(this.mouse.type==='flat'){
+			event.stopPropagation();
+			this.flatMdown(event);
+		}
+	}
 	barMdown(event){
+		event.preventDefault();
 		this.mouse = {
 			type:'bar',
 			x:event.clientX,
@@ -84,6 +94,12 @@ class ColorPicker extends Component{
 		this._initFlat(this._hsb2rgb(hsb).toCss);
 		this._analysePos(this.state.flatPos,barPos)
 	}
+	barMmove(event){
+		if(this.mouse.type==='bar'){
+			event.stopPropagation();
+			this.barMdown(event);
+		}
+	}
 	mouseMove(event){
 		if(this.mouse.type!==undefined){
 			var x = (event.clientX - this.mouse.x)/160;
@@ -92,12 +108,13 @@ class ColorPicker extends Component{
 			this.mouse.y = event.clientY;
 		}
 		if(this.mouse.type==='flat'){
-			var fx = this.state.flatPos[0]+x;
-			var fy = this.state.flatPos[1]+y;
-			fx<0&&(fx=0);
-			fx>1&&(fx=1);
-			fy<0&&(fy=0);
-			fy>1&&(fy=1);
+			var rect = this.refs.flat.getBoundingClientRect(),fx,fy; 
+			fx = this.state.flatPos[0]+x;
+			fy = this.state.flatPos[1]+y;
+			event.clientX<rect.left&&(fx=0);
+			event.clientX>rect.right&&(fx=1);
+			event.clientY<rect.top&&(fy=0);
+			event.clientY>rect.bottom&&(fy=1);
 			var flatPos = [fx,fy];
 			this.setState({
 				flatPos
@@ -105,9 +122,10 @@ class ColorPicker extends Component{
 			this._analysePos(flatPos,this.state.barPos)
 		}
 		if(this.mouse.type==="bar"){
+			var rect = this.refs.bar.getBoundingClientRect(),fx,fy; 
 			var barPos = this.state.barPos+y;
-			barPos<0&&(barPos=0);
-			barPos>1&&(barPos=1);
+			event.clientY<rect.top&&(barPos=0);
+			event.clientY>rect.bottom&&(barPos=1);
 			var hsb = [(1-barPos)*360,1,1];
 			this.setState({
 				barPos
@@ -149,11 +167,11 @@ class ColorPicker extends Component{
 		return (
 			<div className="color-picker" style={{left:posX,top:posY}}>
 				<div className="flat">
-					<canvas ref="flat" width="160" height="160" onMouseDown={this.flatMdown} />
+					<canvas ref="flat" width="160" height="160" onMouseDown={this.flatMdown} onMouseMove={this.flatMmove}/>
 					<span className="dot" style={styles.flat}/>
 				</div>
 				<div className="bar">
-					<canvas ref="bar" width="20" height="160"	onMouseDown={this.barMdown} />
+					<canvas ref="bar" width="20" height="160"	onMouseDown={this.barMdown} onMouseMove={this.barMmove}/>
 					<span className="focus" style={styles.bar}/>
 				</div>
 				<div className="info">

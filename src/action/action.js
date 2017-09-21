@@ -1,37 +1,52 @@
-import {CHANGE_COLOR,CHANGE_NAME,OVER,COLOR_LIST,COLOR_PICKER,CLOSE_COLOR_PICKER} from './actionType.js'
+import * as Action from './actionType.js'
 
 export function changeColor(payload){
 	return{
-		type:CHANGE_COLOR,
+		type:Action.CHANGE_COLOR,
 		payload
 	}
 }
 export function changeName(payload){
 	return{
-		type:CHANGE_NAME,
+		type:Action.CHANGE_NAME,
 		payload
 	}
 }
 export function callModalOver(payload){
 	return {
-		type:OVER,
+		type:Action.OVER,
 		payload
 	}
 }
 export function callColorModal(payload){
 	return {
-		type:COLOR_LIST,
+		type:Action.COLOR_LIST,
 		payload
 	}
 }
 export function callColorPicker(payload){
 	return {
-		type:COLOR_PICKER,
+		type:Action.COLOR_PICKER,
 		payload
 	}
 }
 export function closeColorPicker(){
 	return {
-		type:CLOSE_COLOR_PICKER
+		type:Action.CLOSE_COLOR_PICKER
+	}
+}
+export function callVersionModal(payload){
+	return{
+		type:Action.VERSION_MODAL,
+		payload
+	}
+}
+export function closeModal(){
+	return{
+		type:Action.CLOSE_MODAL,
+		payload:{
+			over:false,
+			versionModal:false,
+		}
 	}
 }

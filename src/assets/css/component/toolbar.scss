@@ -1,0 +1,54 @@
+.toolbar{
+	padding: 15px 60px 0;
+	overflow: hidden;
+	.left{
+		float: left;
+		font-size: 14px;
+	}
+	.right{
+		float: right;
+		color: #747b85;
+		.fold-return{
+			float: left;
+			line-height: 33px;
+			margin-right: 20px;
+			i{font-weight: bold;}
+		}
+		.search{
+			float: left;
+			position: relative;
+			border-radius: 16.5px;
+			overflow: hidden;
+			input{
+				line-height: 33px;
+				height: 33px;
+				background: #fff;
+				padding-left: 12px;
+				width: 268px;
+			}
+			.searchBtn{
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 216px;
+				line-height: 33px;
+				width: 50px;
+				text-align: center;
+				.ico-search{
+					vertical-align: middle;
+				}
+			}
+		}
+		span{
+			cursor: pointer;
+			line-height: 33px;
+			float: left;
+			margin-left:20px;
+			i{
+				font-size: 22px;
+				vertical-align: middle;
+				&.ico-showlist,&.ico-showblock{font-size: 18px;}
+			}
+		}
+	}
+}

@@ -55,6 +55,13 @@ export const animation = {
 			node.classList.remove('animated','fadeInDown','shorten')
 		})
 	},
+	zoomIn:(node,done)=>{
+		node.classList.add('animated','zoomIn')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','zoomIn')
+		})
+	},
 	bounceOut:(node,done)=>{
 		node.classList.add('animated','bounceOut')
 		node.addEventListener('animationend',()=>{
@@ -67,6 +74,13 @@ export const animation = {
 		node.addEventListener('animationend',()=>{
 			done();
 			node.classList.remove('animated','fadeOutDown','shorten')
+		})
+	},
+	fadeOutUp:(node,done)=>{
+		node.classList.add('animated','fadeOutUp','shorten')
+		node.addEventListener('animationend',()=>{
+			done();
+			node.classList.remove('animated','fadeOutUp','shorten')
 		})
 	},
 

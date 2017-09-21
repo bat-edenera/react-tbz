@@ -11,6 +11,9 @@ class Statebar extends Component{
 	componentDidMount(){
 		this.setState({show:true})
 	}
+	componentWillUnmount(){
+		this.setState({show:false})
+	}
 	render(){
 		const {title,count,subtitle} = this.props;
 		const _html = (<div className="state-bar">
@@ -20,7 +23,7 @@ class Statebar extends Component{
 				{subtitle.length>0&&(<span className="tip">&nbsp;&nbsp;{subtitle}</span>)}
 			</div>
 		</div>)
-		return (<Animate component="" animation={{enter:animation.flipInX}} transitionAppear={true}>
+		return (<Animate component="" animation={{enter:animation.fadeInDown,leave:animation.fadeOutUp}} >
 					{this.state.show?_html:null}
 				</Animate>
 		)
