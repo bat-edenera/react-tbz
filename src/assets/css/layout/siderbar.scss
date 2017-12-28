@@ -1,0 +1,235 @@
+.siderbar{
+	height: calc(100vh - 57px);
+	min-height: 685px;
+	position: fixed;
+	top: 57px;
+	left: 0;
+	width: 248px;
+	background: #48525e;
+	color: #fff;
+	font-size: .14rem;
+	.navlist{
+		padding: 18px 0;
+		border-bottom: 1px solid #686f78;
+		li{
+			position: relative;
+			height: 40px;
+			line-height: 40px;
+			color: #9ba0a7;
+			a{
+				display: block;
+				position: relative;
+				border-left:5px solid transparent;
+				padding-left: 19px;
+				i{
+					font-size: 18px;
+					position: absolute;
+					top: 1px;
+					left: 19px;
+					-webkit-transition: left .3s ease-out;
+					transition: left .3s ease-out;
+				}
+				.subtitle{
+					color: #fff;
+					padding-left: 32px;
+				}
+				.count{
+					position: absolute;
+					right: 19px;
+					top: 10px;
+					width: 24px;
+					height: 20px;
+					line-height: 20px;
+					text-align: center;
+					border-radius: 10px;
+					font-size: 13px;
+					font-family: arial,'microsoft yahei';
+					display: inline-block;
+				}
+				&:hover{
+					i{
+						left: 24px;
+					}
+					.subtitle{
+						color: #bfc1c4;
+					}
+				}
+				&.active{
+					.subtitle{
+						color: inherit;
+					}
+					&:hover{
+						i{
+							left: 19px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.user-box{
+		border-bottom: 1px solid #686f78;
+		padding-bottom: 10px;
+		.avatar-box{
+			height: 85px;
+			background: #3a434c;
+			position: relative;
+			a{
+				position: absolute;
+				left: 86px;
+				bottom: -14px;
+				width: 76px;
+				height: 76px;
+				img{
+					border-radius: 50%;
+					box-shadow: 0 0 0 8px #3a434c;
+				}
+			}
+		}
+		p{
+			margin-top: 20px;
+			line-height: 36px;
+			text-align: center;
+		}
+		.info{
+			font-size: 12px;
+			padding:0 20px 5px 10px;
+			overflow: hidden;
+			&.no-login{
+				padding-left: 62px;
+			}
+			.left{float: left;}
+			.right{float: right;}
+			a{
+				&.team{
+					padding: 5px;
+					border-radius: 3px;
+				}
+			}
+			span{cursor: pointer;}
+			.split{
+				display: inline-block;
+				width: 1px;
+				height: 15px;
+				background: #686f78;
+				vertical-align: middle;
+				margin:0 5px;
+			}
+		}
+	}
+	.user-nav{
+		padding:18px 0;
+		border-bottom: 1px solid #686f78;
+		.nav-list{
+			li{
+				padding-left: 24px;
+				position: relative;
+				height: 40px;
+				line-height: 40px;
+				color: #9ba0a7;
+				.before{
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 5px;
+					height: 40px;
+					display: none;
+				}
+				a{
+					display: block;
+					position: relative;
+					span{
+						color: #fff;
+						padding-left: 32px;
+					}
+					i{
+						font-size: 18px;
+						position: absolute;
+						top:1px;
+						left: 0;
+						transition:left .3s ease-out;
+					}
+				}
+				.count{
+					position: absolute;
+					right: 19px;
+					top: 10px;
+					width: 24px;
+					height: 20px;
+					line-height: 20px;
+					text-align: center;
+					border-radius:10px; 
+					font-size: 13px;
+					font-family: arial,'microsoft yahei';
+				}
+				&.active{
+					background: #333a42;
+					.before{
+						display: block
+					}
+				}
+				&:hover{
+					a{
+						span{
+							color: #bfc1c4;
+						}
+						i{
+							left: 5px;
+						}
+					}
+				}
+			}
+			
+		}
+	}
+	.other-info{
+		padding-left: 24px;
+		ul{
+			li{
+				padding-top: 18px;
+				padding-left: 32px;
+				color: #9ba0a7;
+				height: 63px;
+				position: relative;
+				i{
+					position: absolute;
+					left: 0;
+					top: 35px;
+					font-size: 18px;
+				}
+				span{line-height: 25px;color: #c3c3c3;}
+				.slide{
+					position: relative;
+					height: 15px;
+					width: 162px;
+					border-radius: 7.5px;
+					background-color: #72767b;
+					overflow: hidden;
+					span{
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 15px;
+						border-radius: 7.5px;
+					}
+				}
+			}
+		}
+	}
+	.copy-right{
+		position: absolute;
+		bottom: 12px;
+		left: 0;
+		font-size: 12px;
+		padding-left: 24px;
+		color: #747982;
+		.ico-logo2{
+			font-size: 68px;
+			margin-bottom: 20px;
+			display: inline-block;
+			height: 30px;
+			vertical-align: top;
+		}
+		p{line-height: 16px;}
+	}
+}

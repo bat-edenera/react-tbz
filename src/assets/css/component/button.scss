@@ -1,0 +1,22 @@
+.ui_button{
+	cursor: pointer;
+	overflow: hidden;
+	display: inline-block;
+	line-height: 35px;
+	border-radius: 3px;
+	margin-right: 10px;
+	color:#fff;
+	.ico{
+		width: 36px;
+		float: left;
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		i{
+			margin-left: 4px;
+		}
+	}
+	.title{
+		padding: 0 18px 0 12px;
+	}
+}

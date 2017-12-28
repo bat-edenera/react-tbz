@@ -11,6 +11,11 @@ article, aside, figure, footer, header, nav, section, details, summary {display:
 
 html {
 	box-sizing: border-box;
+	font-size: 625%;
+}
+body{
+	font-size: .12rem;
+	/* user-select:none; */
 }
 
 *,

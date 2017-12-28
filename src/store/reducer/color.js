@@ -1,7 +1,15 @@
-export default (state="#00a2eb",action)=>{
+//系列颜色
+const color = {
+	bgColor:'',
+	darkColor:'',
+	lightColor:'',
+	fontColor:'',
+	underBg:''
+}
+export default (state=color,action)=>{
 	switch (action.type){
-		case 'CHANGE_COLOR':
-			return action.color
+		case 'INIT_COLOR':
+			return {...action.payload}
 		default:
 			return state
 	}

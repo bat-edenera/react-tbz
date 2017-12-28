@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {BrowserRouter as Router,Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
+
 import Tplcenter from './pages/tplCenter.js';
 import Tpllist from './pages/tplList.js';
 import Mydesign from './pages/mydesign.js';
@@ -9,7 +10,7 @@ import Myfav from './pages/myfav.js';
 import Shareme from './pages/shareme.js';
 import Trash from './pages/trash.js';
 
-export default class Container extends Component{
+class Container extends Component{
 	render(){
 		return (
 			<div className="container">
@@ -26,3 +27,5 @@ export default class Container extends Component{
 		)
 	}
 }
+export default Container
+

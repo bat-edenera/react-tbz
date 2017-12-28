@@ -1,0 +1,19 @@
+.state-bar{
+	position: fixed;
+	z-index: 99;
+	width: 100%;
+	background: #3a434c;
+	height: 85px;
+	padding:0 60px;
+	color: #fff;
+	padding-top: 12px;
+	.title{
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 35px;
+	}
+	.subtitle{
+		line-height: 21px;
+		.tip{color: #a2a6ab;}
+	}
+}
